@@ -13,5 +13,5 @@ if __name__ == '__main__':
         k, m, n = f.read().strip().split(' ')
     p = calculate_dominant_probability(int(k), int(m), int(n))
     print(p)
-    with open('./submission/mendels_first_law.py', mode='w') as f:
+    with open('./submission/mendels_first_law.txt', mode='w') as f:
         f.write(str(p))

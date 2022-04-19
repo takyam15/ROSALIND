@@ -33,5 +33,5 @@ if __name__ == '__main__':
     for dna in dnas_max_gc:
         answer += f'{dna[0]}\n{dna[1]}\n'
     print(answer)
-    with open('./dataset/computing_gc_content.txt', mode='w') as f:
+    with open('./submission/computing_gc_content.txt', mode='w') as f:
         f.write(answer)
