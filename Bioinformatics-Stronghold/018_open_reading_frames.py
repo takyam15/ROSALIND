@@ -14,22 +14,21 @@ def translate_protein(s, codon_dict, start_index=0):
     protein = ''
     for i in range(start_index, len(s)):
         codon = s[i:i+3]
-        if codon_dict[codon] == 'M':
-            protein += codon_dict[codon]
+        if codon_dict.get(codon) == 'M':
+            protein += codon_dict.get(codon)
             reading = i + 3
             while reading <= len(s) - 3:
                 codon = s[reading:reading+3]
-                if codon_dict[codon] == 'Stop':
+                if codon_dict.get(codon) == 'Stop':
                     reading += 3
                     break
-                protein += codon_dict[codon]
+                protein += codon_dict.get(codon)
                 reading += 3
-            return protein, reading
+            return protein, i + 3
     return protein, len(s)-1
 
 
 def get_translated_proteins(s, codon_dict):
-    print(s)
     proteins = []
     start_index = 0
     while True:
