@@ -67,21 +67,26 @@ def score(motifs):
     return distance
 
 
-def main(file, export=True):
+def main(file, export=True, n_iter=1000):
     k, t, strings = read(f'./dataset/{file}.txt')
-    motifs = []
-    for string in strings:
-        i = np.random.randint(len(string)-k+1)
-        motifs.append(string[i:i+k])
-    best_motifs = motifs
-    while True:
-        profile_matrix = get_profile(motifs)
-        motifs = get_motifs(profile_matrix, strings)
-        if score(motifs) < score(best_motifs):
-            best_motifs = motifs
-        else:
-            break
-    output = '\n'.join(best_motifs)
+    motif_scores = {}
+    for _ in range(n_iter):
+        motifs = []
+        for string in strings:
+            i = np.random.randint(len(string)-k+1)
+            motifs.append(string[i:i+k])
+        best_motifs = motifs
+        while True:
+            profile_matrix = get_profile(motifs)
+            motifs = get_motifs(profile_matrix, strings)
+            if score(motifs) < score(best_motifs):
+                best_motifs = motifs
+            else:
+                break
+        motif_scores['\n'.join(best_motifs)] = score(best_motifs)
+    output = [
+        selected_motifs for selected_motifs in motif_scores if motif_scores[selected_motifs]==min(motif_scores.values())
+    ][0]
     print(output)
     if export:
         with open(f'./submission/{file}.txt', mode='w') as f:
@@ -89,5 +94,5 @@ def main(file, export=True):
 
 
 if __name__ == '__main__':
-    main('sample_rosalind_ba2f')
-    #main('rosalind_ba2f')
+    #main('sample_rosalind_ba2f', n_iter=1000)
+    main('rosalind_ba2f')
