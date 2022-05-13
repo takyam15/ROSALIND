@@ -94,5 +94,5 @@ def main(file, export=True, n_iter=1000):
 
 
 if __name__ == '__main__':
-    #main('sample_rosalind_ba2f', n_iter=1000)
+    main('sample_rosalind_ba2f', n_iter=1000)
     main('rosalind_ba2f')
