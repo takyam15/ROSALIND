@@ -1,0 +1,4 @@
+pycaret[full]
+autokeras
+biopython
+jupyterlab
